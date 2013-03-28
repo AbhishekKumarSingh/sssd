@@ -34,7 +34,7 @@
 #include "tests/common.h"
 #include "dhash.h"
 
-void test_check_if_uid_is_active_success(void ** state)
+void test_check_if_uid_is_active_success(void **state)
 {
     int ret;
     uid_t uid;
