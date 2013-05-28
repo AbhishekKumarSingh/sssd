@@ -606,6 +606,7 @@ libsss_nss_idmap_la_LDFLAGS = \
     $(CLIENT_LIBS) \
     -version-info 0:1:0
 
+
 include_HEADERS = \
     src/providers/ipa/ipa_hbac.h \
     src/lib/idmap/sss_idmap.h \
@@ -617,8 +618,7 @@ include_HEADERS = \
 sssd_SOURCES = \
     src/monitor/monitor.c \
     src/monitor/monitor_netlink.c \
-    src/confdb/confdb_setup.c \
-    src/util/nscd.c
+    src/confdb/confdb_setup.c
 sssd_LDADD = \
     $(SSSD_LIBS) \
     $(LIBNL_LIBS) \
@@ -635,7 +635,6 @@ sssd_nss_SOURCES = \
 sssd_nss_LDADD = \
     $(TDB_LIBS) \
     $(SSSD_LIBS) \
-    libsss_idmap.la \
     libsss_util.la
 
 sssd_pam_SOURCES = \
@@ -873,8 +872,7 @@ libsss_test_common_la_SOURCES = \
 
 if HAVE_CHECK
 libsss_test_common_la_SOURCES += \
-    src/tests/common_check.c	 \
-    src/tests/leak_check.c
+    src/tests/common_check.c
 
 sysdb_tests_DEPENDENCIES = \
     $(ldblib_LTLIBRARIES)
@@ -1082,7 +1080,6 @@ simple_access_tests_CFLAGS = \
     $(CHECK_CFLAGS) \
     -DUNIT_TESTING
 simple_access_tests_LDADD = \
-    -ldl \
     $(SSSD_LIBS) \
     $(CARES_LIBS) \
     $(CHECK_LIBS) \
@@ -1445,7 +1442,6 @@ libsss_ldap_common_la_SOURCES = \
     src/providers/ldap/sdap_idmap.h \
     src/providers/ldap/sdap_range.c \
     src/providers/ldap/sdap_reinit.c \
-    src/providers/ldap/sdap_dyndns.c \
     src/providers/ldap/sdap.c
 libsss_ldap_common_la_LDFLAGS = \
     -avoid-version
@@ -1574,7 +1570,6 @@ libsss_ipa_la_SOURCES = \
     src/providers/ipa/ipa_selinux.c \
     src/providers/ipa/ipa_selinux_maps.c \
     src/providers/ipa/ipa_selinux_common.c \
-    src/providers/ipa/ipa_srv.c \
     src/util/user_info_msg.c \
     src/util/find_uid.c \
     src/util/sss_ldap.c \
@@ -1999,6 +1994,7 @@ endif
 srpm: rpmbrprep
 	cd $(RPMBUILD); \
 	rpmbuild --define "_topdir $(RPMBUILD)" \
+	         --define _source_filedigest_algorithm=1 \
 	         -bs SPECS/sssd.spec
 
 if GIT_CHECKOUT
